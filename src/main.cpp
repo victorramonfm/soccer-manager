@@ -1,10 +1,7 @@
-#include <iostream>
+#include "./include/ScreenManager.h"
 
-using namespace std;
-
-int main(){
-
-    cout << "Soccer Manager" << endl;
-
+int main() {
+    ScreenManager app;
+    app.run();
     return 0;
 }
