@@ -14,7 +14,6 @@
 | [Nome do Aluno 1]          | [202xxxxx]  | [aluno1@ufrn.br]       | 
 | [Nome do Aluno 2]          | [202xxxxx]  | [aluno2@ufrn.br]       | 
 | Victor Ramon Firmo Moreira | 20250052835 | victor.moreira@ufrn.br | 
-| [Nome do Aluno 4]          | [202xxxxx]  | [aluno4@ufrn.br]       | 
 
 ---
 
