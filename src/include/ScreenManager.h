@@ -51,6 +51,9 @@ private:
     void addStadium();
     void addSponsor();
     void addLeague();
+    void addPlayerToTeam(const std::vector<Loggable*>& teamLoggables);
+    void addSponsorToTeam(const std::vector<Loggable*>& teamLoggables);
+    void addTeamToLeague(const std::vector<Loggable*>& leagueLoggables);
 
     void updatePlayer(const std::vector<Loggable*>& loggables);
     void updateCoach(const std::vector<Loggable*>& loggables);
@@ -59,12 +62,23 @@ private:
     void updateSponsor(const std::vector<Loggable*>& loggables);
     void updateLeague(const std::vector<Loggable*>& loggables);
 
+    void setCoachToTeam(const std::vector<Loggable*>& teamLoggables);
+    void setStadiumToTeam(const std::vector<Loggable*>& teamLoggables);
+    
     void removePlayer(const std::vector<Loggable*>& loggables);
     void removeCoach(const std::vector<Loggable*>& loggables);
     void removeTeam(const std::vector<Loggable*>& loggables);
     void removeStadium(const std::vector<Loggable*>& loggables);
     void removeSponsor(const std::vector<Loggable*>& loggables);
     void removeLeague(const std::vector<Loggable*>& loggables);
+    void removeTeamMembers(const std::vector<Loggable*>& teamLoggables);
+    void removeTeamFromLeague(const std::vector<Loggable*>& leagueLoggables);
+    
+    bool isPlayerLinked(const Player* player) const;
+    bool isCoachLinked(const Coach* coach) const;
+    bool isStadiumLinked(const Stadium* stadium) const;
+    bool isSponsorLinked(const Sponsor* sponsor) const;
+    bool isTeamLinked(const Team* team) const;
 
 public:
     ScreenManager();

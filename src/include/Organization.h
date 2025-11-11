@@ -2,7 +2,6 @@
 #include <string>
 #include "Loggable.h"
 
-// Classe Base Abstrata 2 (Req 3.a)
 class Organization {
 protected:
     std::string name;

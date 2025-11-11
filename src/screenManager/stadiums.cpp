@@ -8,6 +8,7 @@
 
 void ScreenManager::manageStadiums() {
     int choice;
+    
     do {
         clearScreen();
         std::cout << "===== 🏟️ Gerenciar Estádios =====\n";
@@ -90,6 +91,12 @@ void ScreenManager::updateStadium(const std::vector<Loggable*>& loggables) {
 void ScreenManager::removeStadium(const std::vector<Loggable*>& loggables) {
     int index = selectItem(loggables, "remover");
     if (index == -1) return;
+
+    Stadium* stadium = stadiums[index].get();    
+
+    if (isStadiumLinked(stadium)) {
+        throw ValidationException("O estadio (" + stadium->getName() + ") nao pode ser removido, pois esta vinculado a pelo menos um time.");
+    }
 
     Loggable::print("Tem certeza que deseja remover ");
     std::cout << *(stadiums[index]);
