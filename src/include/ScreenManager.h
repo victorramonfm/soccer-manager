@@ -1,16 +1,16 @@
 #pragma once
 
-#include <vector>
 #include <memory>
 #include <string>
+#include <vector>
 
-#include "Loggable.h" 
-#include "Player.h"
 #include "Coach.h"
-#include "Team.h"
-#include "Stadium.h"
-#include "Sponsor.h"
 #include "League.h"
+#include "Loggable.h"
+#include "Player.h"
+#include "Sponsor.h"
+#include "Stadium.h"
+#include "Team.h"
 
 using PlayerPtr = std::unique_ptr<Player>;
 using CoachPtr = std::unique_ptr<Coach>;
@@ -20,7 +20,7 @@ using SponsorPtr = std::unique_ptr<Sponsor>;
 using LeaguePtr = std::unique_ptr<League>;
 
 class ScreenManager {
-private:
+   private:
     std::vector<PlayerPtr> players;
     std::vector<CoachPtr> coaches;
     std::vector<TeamPtr> teams;
@@ -44,7 +44,7 @@ private:
 
     void listItems(const std::vector<Loggable*>& items, const std::string& title);
     int selectItem(const std::vector<Loggable*>& items, const std::string& prompt);
-    
+
     void addPlayer();
     void addCoach();
     void addTeam();
@@ -64,7 +64,7 @@ private:
 
     void setCoachToTeam(const std::vector<Loggable*>& teamLoggables);
     void setStadiumToTeam(const std::vector<Loggable*>& teamLoggables);
-    
+
     void removePlayer(const std::vector<Loggable*>& loggables);
     void removeCoach(const std::vector<Loggable*>& loggables);
     void removeTeam(const std::vector<Loggable*>& loggables);
@@ -73,14 +73,14 @@ private:
     void removeLeague(const std::vector<Loggable*>& loggables);
     void removeTeamMembers(const std::vector<Loggable*>& teamLoggables);
     void removeTeamFromLeague(const std::vector<Loggable*>& leagueLoggables);
-    
+
     bool isPlayerLinked(const Player* player) const;
     bool isCoachLinked(const Coach* coach) const;
     bool isStadiumLinked(const Stadium* stadium) const;
     bool isSponsorLinked(const Sponsor* sponsor) const;
     bool isTeamLinked(const Team* team) const;
 
-public:
+   public:
     ScreenManager();
 
     void run();

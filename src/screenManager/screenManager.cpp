@@ -1,13 +1,14 @@
 #include "../include/ScreenManager.h"
-#include "../include/CustomException.h"
-#include "../include/Loggable.h" 
+
 #include <iostream>
-#include <string>
 #include <limits>
+#include <string>
 #include <vector>
 
-ScreenManager::ScreenManager() {
-}
+#include "../include/CustomException.h"
+#include "../include/Loggable.h"
+
+ScreenManager::ScreenManager() {}
 
 void ScreenManager::run() {
     int choice;
@@ -16,13 +17,27 @@ void ScreenManager::run() {
         choice = getMenuOption(0, 7);
 
         switch (choice) {
-            case 1: managePlayers(); break;
-            case 2: manageCoaches(); break;
-            case 3: manageTeams(); break;
-            case 4: manageStadiums(); break;
-            case 5: manageSponsors(); break;
-            case 6: manageLeagues(); break;        
-            case 0: Loggable::print("Saindo... Ate logo!\n"); break;
+            case 1:
+                managePlayers();
+                break;
+            case 2:
+                manageCoaches();
+                break;
+            case 3:
+                manageTeams();
+                break;
+            case 4:
+                manageStadiums();
+                break;
+            case 5:
+                manageSponsors();
+                break;
+            case 6:
+                manageLeagues();
+                break;
+            case 0:
+                Loggable::print("Saindo... Ate logo!\n");
+                break;
         }
     } while (choice != 0);
 }
@@ -48,11 +63,11 @@ int ScreenManager::getMenuOption(int min, int max) {
         std::cin >> choice;
         if (std::cin.fail() || choice < min || choice > max) {
             std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');        
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             Loggable::print("Opcao invalida. Por favor, digite um numero entre ");
-        std::cout << min;
+            std::cout << min;
             Loggable::print(" e ");
-        std::cout << max;
+            std::cout << max;
             Loggable::print(": ");
         } else {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

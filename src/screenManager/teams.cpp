@@ -1,23 +1,24 @@
-#include "../include/ScreenManager.h"
-#include "../include/CustomException.h"
-#include "../include/Loggable.h" 
-#include "../include/Team.h"
-#include "../include/Player.h"
-#include "../include/Coach.h"
-#include "../include/Stadium.h"
-#include "../include/Sponsor.h"
-#include <iostream>
-#include <string>
-#include <limits>
-#include <vector>
 #include <algorithm>
+#include <iostream>
+#include <limits>
+#include <string>
+#include <vector>
+
+#include "../include/Coach.h"
+#include "../include/CustomException.h"
+#include "../include/Loggable.h"
+#include "../include/Player.h"
+#include "../include/ScreenManager.h"
+#include "../include/Sponsor.h"
+#include "../include/Stadium.h"
+#include "../include/Team.h"
 
 void Team::addPlayer(Player* player) {
     if (std::find(players.begin(), players.end(), player) != players.end()) {
         throw ValidationException("O jogador ja faz parte deste time.");
     }
 
-    if (players.size() >= 36) { 
+    if (players.size() >= 36) {
         throw ValidationException("O time atingiu o limite maximo de 25 jogadores.");
     }
     players.push_back(player);
@@ -74,15 +75,11 @@ void Team::removeStadium() {
     stadium = nullptr;
 }
 
-void Team::displayDetails() const {
-    display(std::cout);
-}
+void Team::displayDetails() const { display(std::cout); }
 
 void Team::display(std::ostream& os) const {
-    os << "TIME: " << name
-       << " (Fundado: " << foundedYear
-       << ", Cidade: " << city << ")";
-       
+    os << "TIME: " << name << " (Fundado: " << foundedYear << ", Cidade: " << city << ")";
+
     os << "\n    Tecnico: " << (coach ? coach->getName() : "N/A");
     os << "\n    Estadio: " << (stadium ? stadium->getName() : "N/A");
 
@@ -92,19 +89,21 @@ void Team::display(std::ostream& os) const {
     } else {
         bool first = true;
         for (const auto& player : players) {
-            if (!first) os << ", ";
+            if (!first)
+                os << ", ";
             os << player->getName();
             first = false;
         }
     }
-    
+
     os << "\n    Patrocinadores (" << sponsors.size() << "): ";
     if (sponsors.empty()) {
         os << "Nenhum";
     } else {
         bool first = true;
         for (const auto& sponsor : sponsors) {
-            if (!first) os << ", ";
+            if (!first)
+                os << ", ";
             os << sponsor->getName();
             first = false;
         }
@@ -185,24 +184,44 @@ void ScreenManager::manageTeams() {
 
         try {
             switch (choice) {
-                case 1: addTeam(); break;
-                case 2: listItems(loggables, "Times"); break;
-                case 3: updateTeam(loggables); break;
-                case 4: removeTeam(loggables); break;
-                case 5: addPlayerToTeam(loggables); break;
-                case 6: setCoachToTeam(loggables); break;
-                case 7: setStadiumToTeam(loggables); break;
-                case 8: addSponsorToTeam(loggables); break;
-                case 9: removeTeamMembers(loggables); break; 
-                case 0: break;
+                case 1:
+                    addTeam();
+                    break;
+                case 2:
+                    listItems(loggables, "Times");
+                    break;
+                case 3:
+                    updateTeam(loggables);
+                    break;
+                case 4:
+                    removeTeam(loggables);
+                    break;
+                case 5:
+                    addPlayerToTeam(loggables);
+                    break;
+                case 6:
+                    setCoachToTeam(loggables);
+                    break;
+                case 7:
+                    setStadiumToTeam(loggables);
+                    break;
+                case 8:
+                    addSponsorToTeam(loggables);
+                    break;
+                case 9:
+                    removeTeamMembers(loggables);
+                    break;
+                case 0:
+                    break;
             }
-        } catch (const std::exception& e) {        
+        } catch (const std::exception& e) {
             Loggable::print("\n!!! ERRO: ");
             std::cout << e.what();
             Loggable::print(" !!!\n");
             pause();
         }
-        if(choice != 0) pause();
+        if (choice != 0)
+            pause();
 
     } while (choice != 0);
 }
@@ -210,7 +229,8 @@ void ScreenManager::manageTeams() {
 void ScreenManager::addPlayerToTeam(const std::vector<Loggable*>& teamLoggables) {
     clearScreen();
     int teamIndex = selectItem(teamLoggables, "adicionar jogador (Time)");
-    if (teamIndex == -1) return;
+    if (teamIndex == -1)
+        return;
     Team* team = teams[teamIndex].get();
 
     std::vector<Loggable*> playerLoggables;
@@ -219,10 +239,11 @@ void ScreenManager::addPlayerToTeam(const std::vector<Loggable*>& teamLoggables)
     }
 
     int playerIndex = selectItem(playerLoggables, "adicionar ao time (Jogador)");
-    if (playerIndex == -1) return;
+    if (playerIndex == -1)
+        return;
     Player* player = players[playerIndex].get();
 
-    team->addPlayer(player); 
+    team->addPlayer(player);
     Loggable::print("\nJogador ");
     std::cout << player->getName();
     Loggable::print(" adicionado ao time ");
@@ -233,7 +254,8 @@ void ScreenManager::addPlayerToTeam(const std::vector<Loggable*>& teamLoggables)
 void ScreenManager::setCoachToTeam(const std::vector<Loggable*>& teamLoggables) {
     clearScreen();
     int teamIndex = selectItem(teamLoggables, "definir tecnico (Time)");
-    if (teamIndex == -1) return;
+    if (teamIndex == -1)
+        return;
     Team* team = teams[teamIndex].get();
 
     std::vector<Loggable*> coachLoggables;
@@ -242,10 +264,11 @@ void ScreenManager::setCoachToTeam(const std::vector<Loggable*>& teamLoggables) 
     }
 
     int coachIndex = selectItem(coachLoggables, "definir como tecnico");
-    if (coachIndex == -1) return;
+    if (coachIndex == -1)
+        return;
     Coach* coach = coaches[coachIndex].get();
 
-    team->setCoach(coach); 
+    team->setCoach(coach);
     Loggable::print("\nTecnico ");
     std::cout << coach->getName();
     Loggable::print(" definido para o time ");
@@ -256,7 +279,8 @@ void ScreenManager::setCoachToTeam(const std::vector<Loggable*>& teamLoggables) 
 void ScreenManager::setStadiumToTeam(const std::vector<Loggable*>& teamLoggables) {
     clearScreen();
     int teamIndex = selectItem(teamLoggables, "definir estadio (Time)");
-    if (teamIndex == -1) return;
+    if (teamIndex == -1)
+        return;
     Team* team = teams[teamIndex].get();
 
     std::vector<Loggable*> stadiumLoggables;
@@ -265,10 +289,11 @@ void ScreenManager::setStadiumToTeam(const std::vector<Loggable*>& teamLoggables
     }
 
     int stadiumIndex = selectItem(stadiumLoggables, "definir como estadio");
-    if (stadiumIndex == -1) return;
+    if (stadiumIndex == -1)
+        return;
     Stadium* stadium = stadiums[stadiumIndex].get();
 
-    team->setStadium(stadium); 
+    team->setStadium(stadium);
     Loggable::print("\nEstadio ");
     std::cout << stadium->getName();
     Loggable::print(" definido para o time ");
@@ -279,7 +304,8 @@ void ScreenManager::setStadiumToTeam(const std::vector<Loggable*>& teamLoggables
 void ScreenManager::addSponsorToTeam(const std::vector<Loggable*>& teamLoggables) {
     clearScreen();
     int teamIndex = selectItem(teamLoggables, "adicionar patrocinador (Time)");
-    if (teamIndex == -1) return;
+    if (teamIndex == -1)
+        return;
     Team* team = teams[teamIndex].get();
 
     std::vector<Loggable*> sponsorLoggables;
@@ -288,10 +314,11 @@ void ScreenManager::addSponsorToTeam(const std::vector<Loggable*>& teamLoggables
     }
 
     int sponsorIndex = selectItem(sponsorLoggables, "adicionar ao time (Patrocinador)");
-    if (sponsorIndex == -1) return;
+    if (sponsorIndex == -1)
+        return;
     Sponsor* sponsor = sponsors[sponsorIndex].get();
 
-    team->addSponsor(sponsor); 
+    team->addSponsor(sponsor);
     Loggable::print("\nPatrocinador ");
     std::cout << sponsor->getName();
     Loggable::print(" adicionado ao time ");
@@ -303,7 +330,8 @@ void ScreenManager::removeTeamMembers(const std::vector<Loggable*>& teamLoggable
     clearScreen();
     // 1. Seleciona o time
     int teamIndex = selectItem(teamLoggables, "remover membro");
-    if (teamIndex == -1) return;
+    if (teamIndex == -1)
+        return;
     Team* team = teams[teamIndex].get();
 
     Loggable::print("\n-- Remocao de Membros do Time: ");
@@ -317,9 +345,9 @@ void ScreenManager::removeTeamMembers(const std::vector<Loggable*>& teamLoggable
     Loggable::print("[4] Patrocinador\n");
     Loggable::print("[0] Voltar\n");
     Loggable::print("\nEscolha o tipo de membro para remover: ");
-    
+
     memberChoice = getMenuOption(0, 4);
-    
+
     try {
         switch (memberChoice) {
             case 1: {
@@ -327,15 +355,16 @@ void ScreenManager::removeTeamMembers(const std::vector<Loggable*>& teamLoggable
                 for (const auto& p : team->getPlayers()) {
                     playerLoggables.push_back(p);
                 }
-                
+
                 if (playerLoggables.empty()) {
                     throw ValidationException("Este time nao possui jogadores para remover.");
                 }
 
                 int playerIndex = selectItem(playerLoggables, "remover (Jogador)");
-                if (playerIndex == -1) return;
+                if (playerIndex == -1)
+                    return;
                 Player* player = dynamic_cast<Player*>(playerLoggables[playerIndex]);
-                
+
                 team->removePlayer(player);
                 Loggable::print("\nJogador ");
                 std::cout << player->getName();
@@ -383,22 +412,24 @@ void ScreenManager::removeTeamMembers(const std::vector<Loggable*>& teamLoggable
                 for (const auto& s : team->getSponsors()) {
                     sponsorLoggables.push_back(s);
                 }
-                
+
                 if (sponsorLoggables.empty()) {
                     throw ValidationException("Este time nao possui patrocinadores para remover.");
                 }
-                
+
                 int sponsorIndex = selectItem(sponsorLoggables, "remover (Patrocinador)");
-                if (sponsorIndex == -1) return;
+                if (sponsorIndex == -1)
+                    return;
                 Sponsor* sponsor = dynamic_cast<Sponsor*>(sponsorLoggables[sponsorIndex]);
-                
+
                 team->removeSponsor(sponsor);
                 Loggable::print("\nPatrocinador ");
                 std::cout << sponsor->getName();
                 Loggable::print(" removido do time com sucesso.\n");
                 break;
             }
-            case 0: return;
+            case 0:
+                return;
         }
     } catch (const std::exception& e) {
         Loggable::print("\n!!! ERRO: ");
@@ -406,7 +437,7 @@ void ScreenManager::removeTeamMembers(const std::vector<Loggable*>& teamLoggable
         Loggable::print(" !!!\n");
     }
 
-    pause(); 
+    pause();
 }
 
 void ScreenManager::addTeam() {
@@ -417,7 +448,7 @@ void ScreenManager::addTeam() {
 
     Loggable::print("Nome: ");
     std::getline(std::cin >> std::ws, name);
-    
+
     if (name.empty()) {
         throw ValidationException("Nome nao pode ser vazio.");
     }
@@ -427,39 +458,43 @@ void ScreenManager::addTeam() {
 
     Loggable::print("Cidade Sede: ");
     std::getline(std::cin >> std::ws, city);
-    
+
     teams.push_back(std::make_unique<Team>(name, year, city));
     Loggable::print("\nTime adicionado com sucesso!\n");
 }
 
 void ScreenManager::updateTeam(const std::vector<Loggable*>& loggables) {
     int index = selectItem(loggables, "atualizar");
-    if (index == -1) return;
+    if (index == -1)
+        return;
 
     Team* team = teams[index].get();
     std::cout << "Editando: " << *team << "\n";
-    
+
     std::string newCity;
     Loggable::print("Nova Cidade (deixe em branco para manter '");
     std::cout << team->getCity();
     Loggable::print("'): ");
     std::getline(std::cin >> std::ws, newCity);
-    
+
     if (!newCity.empty()) {
         team->setCity(newCity);
     }
-    
+
     Loggable::print("\nTime atualizado com sucesso!\n");
 }
 
 void ScreenManager::removeTeam(const std::vector<Loggable*>& loggables) {
     int index = selectItem(loggables, "remover");
-    if (index == -1) return;
+    if (index == -1)
+        return;
 
     Team* team = teams[index].get();
 
     if (isTeamLinked(team)) {
-        throw ValidationException("O time (" + team->getName() + ") nao pode ser removido, pois esta vinculado a pelo menos uma liga.");
+        throw ValidationException(
+            "O time (" + team->getName() +
+            ") nao pode ser removido, pois esta vinculado a pelo menos uma liga.");
     }
 
     Loggable::print("Tem certeza que deseja remover ");
@@ -468,9 +503,9 @@ void ScreenManager::removeTeam(const std::vector<Loggable*>& loggables) {
     char confirm;
     std::cin >> confirm;
     if (confirm == 's' || confirm == 'S') {
-        teams.erase(teams.begin() + index);    
+        teams.erase(teams.begin() + index);
         Loggable::print("Time removido com sucesso.\n");
-    } else {    
+    } else {
         Loggable::print("Operacao cancelada.\n");
     }
 }

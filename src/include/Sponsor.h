@@ -1,14 +1,14 @@
 #pragma once
-#include "Organization.h"
 #include <string>
 
+#include "Organization.h"
+
 class Sponsor : public Organization, public Loggable {
-private:
+   private:
     std::string industry;
 
-public:
-    Sponsor(std::string n, int y, std::string i)
-        : Organization(n, y), industry(i) {}
+   public:
+    Sponsor(std::string n, int y, std::string i) : Organization(n, y), industry(i) {}
 
     std::string getIndustry() const { return industry; }
     void setIndustry(const std::string& i) { industry = i; }
@@ -19,7 +19,7 @@ public:
     }
 
     void display(std::ostream& os) const override {
-        os << "PATROCINADOR: " << name
-           << " (Fundado: " << foundedYear << ", Ramo: " << industry << ")";
+        os << "PATROCINADOR: " << name << " (Fundado: " << foundedYear << ", Ramo: " << industry
+           << ")";
     }
 };

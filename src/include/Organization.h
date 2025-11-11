@@ -1,13 +1,14 @@
 #pragma once
 #include <string>
+
 #include "Loggable.h"
 
 class Organization {
-protected:
+   protected:
     std::string name;
     int foundedYear;
 
-public:
+   public:
     Organization(const std::string& n, int y) : name(n), foundedYear(y) {}
     virtual ~Organization() {}
 

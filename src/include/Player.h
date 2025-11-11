@@ -1,15 +1,15 @@
 #pragma once
-#include "Person.h"
 #include <string>
 
-class Player : public Person, public Loggable { 
-private:
+#include "Person.h"
+
+class Player : public Person, public Loggable {
+   private:
     std::string position;
     int number;
 
-public:
-    Player(std::string n, int a, std::string p, int num)
-        : Person(n, a), position(p), number(num) {}
+   public:
+    Player(std::string n, int a, std::string p, int num) : Person(n, a), position(p), number(num) {}
 
     std::string getPosition() const { return position; }
     void setPosition(const std::string& p) { position = p; }
@@ -20,8 +20,7 @@ public:
     }
 
     void display(std::ostream& os) const override {
-        os << "JOGADOR [Num " << number << "]: " << name
-           << " (Idade: " << age << ", Pos: " << position << ")";
+        os << "JOGADOR [Num " << number << "]: " << name << " (Idade: " << age
+           << ", Pos: " << position << ")";
     }
 };
-

@@ -1,14 +1,15 @@
-#include "../include/ScreenManager.h"
-#include "../include/CustomException.h"
-#include "../include/Loggable.h" 
 #include <iostream>
-#include <string>
 #include <limits>
+#include <string>
 #include <vector>
+
+#include "../include/CustomException.h"
+#include "../include/Loggable.h"
+#include "../include/ScreenManager.h"
 
 void ScreenManager::manageStadiums() {
     int choice;
-    
+
     do {
         clearScreen();
         std::cout << "===== 🏟️ Gerenciar Estádios =====\n";
@@ -28,19 +29,29 @@ void ScreenManager::manageStadiums() {
 
         try {
             switch (choice) {
-                case 1: addStadium(); break;
-                case 2: listItems(loggables, "Estádios"); break;
-                case 3: updateStadium(loggables); break;
-                case 4: removeStadium(loggables); break;
-                case 0: break;
+                case 1:
+                    addStadium();
+                    break;
+                case 2:
+                    listItems(loggables, "Estádios");
+                    break;
+                case 3:
+                    updateStadium(loggables);
+                    break;
+                case 4:
+                    removeStadium(loggables);
+                    break;
+                case 0:
+                    break;
             }
-        } catch (const std::exception& e) {        
+        } catch (const std::exception& e) {
             Loggable::print("\n!!! ERRO: ");
             std::cout << e.what();
             Loggable::print(" !!!\n");
             pause();
         }
-        if(choice != 0) pause();
+        if (choice != 0)
+            pause();
 
     } while (choice != 0);
 }
@@ -53,7 +64,7 @@ void ScreenManager::addStadium() {
 
     Loggable::print("Nome: ");
     std::getline(std::cin >> std::ws, name);
-    
+
     if (name.empty()) {
         throw ValidationException("Nome nao pode ser vazio.");
     }
@@ -63,39 +74,43 @@ void ScreenManager::addStadium() {
 
     Loggable::print("Endereco: ");
     std::getline(std::cin >> std::ws, address);
-    
+
     stadiums.push_back(std::make_unique<Stadium>(name, capacity, address));
     Loggable::print("\nEstádio adicionado com sucesso!\n");
 }
 
 void ScreenManager::updateStadium(const std::vector<Loggable*>& loggables) {
     int index = selectItem(loggables, "atualizar");
-    if (index == -1) return;
+    if (index == -1)
+        return;
 
     Stadium* stadium = stadiums[index].get();
     std::cout << "Editando: " << *stadium << "\n";
-    
+
     int newCapacity;
     Loggable::print("Nova Capacidade (0 para manter ");
     std::cout << stadium->getCapacity();
     Loggable::print("): ");
     newCapacity = getMenuOption(0, 200000);
-    
+
     if (newCapacity != 0) {
         stadium->setCapacity(newCapacity);
     }
-    
+
     Loggable::print("\nEstádio atualizado com sucesso!\n");
 }
 
 void ScreenManager::removeStadium(const std::vector<Loggable*>& loggables) {
     int index = selectItem(loggables, "remover");
-    if (index == -1) return;
+    if (index == -1)
+        return;
 
-    Stadium* stadium = stadiums[index].get();    
+    Stadium* stadium = stadiums[index].get();
 
     if (isStadiumLinked(stadium)) {
-        throw ValidationException("O estadio (" + stadium->getName() + ") nao pode ser removido, pois esta vinculado a pelo menos um time.");
+        throw ValidationException(
+            "O estadio (" + stadium->getName() +
+            ") nao pode ser removido, pois esta vinculado a pelo menos um time.");
     }
 
     Loggable::print("Tem certeza que deseja remover ");
@@ -104,9 +119,9 @@ void ScreenManager::removeStadium(const std::vector<Loggable*>& loggables) {
     char confirm;
     std::cin >> confirm;
     if (confirm == 's' || confirm == 'S') {
-        stadiums.erase(stadiums.begin() + index);    
+        stadiums.erase(stadiums.begin() + index);
         Loggable::print("Estádio removido com sucesso.\n");
-    } else {    
+    } else {
         Loggable::print("Operacao cancelada.\n");
     }
 }
