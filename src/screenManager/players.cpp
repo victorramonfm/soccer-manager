@@ -8,6 +8,7 @@
 
 void ScreenManager::managePlayers() {
     int choice;
+    
     do {
         clearScreen();
         std::cout << "===== 👤 Gerenciar Jogadores =====\n";
@@ -93,6 +94,12 @@ void ScreenManager::updatePlayer(const std::vector<Loggable*>& loggables) {
 void ScreenManager::removePlayer(const std::vector<Loggable*>& loggables) {
     int index = selectItem(loggables, "remover");
     if (index == -1) return;
+
+    Player* player = players[index].get();
+
+    if (isPlayerLinked(player)) {
+        throw ValidationException("O jogador (" + player->getName() + ") nao pode ser removido, pois esta vinculado a pelo menos um time.");
+    }
 
     Loggable::print("Tem certeza que deseja remover ");
     std::cout << *(players[index]);

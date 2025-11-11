@@ -95,6 +95,12 @@ void ScreenManager::removeCoach(const std::vector<Loggable*>& loggables) {
     int index = selectItem(loggables, "remover");
     if (index == -1) return;
 
+    Coach* coach = coaches[index].get();
+
+    if (isCoachLinked(coach)) {
+        throw ValidationException("O tecnico (" + coach->getName() + ") nao pode ser removido, pois esta vinculado a pelo menos um time.");
+    }
+
     Loggable::print("Tem certeza que deseja remover ");
     std::cout << *(coaches[index]);
     Loggable::print("? (s/n): ");

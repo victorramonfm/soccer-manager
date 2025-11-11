@@ -45,7 +45,26 @@ classDiagram
 
     class Team {
         -city: string
+        -players : vector<Player*>
+        -coach : Coach*
+        -stadium : Stadium*
+        -sponsors : vector<Sponsor*>
+
         +getCity(): string
+        +getCoach(): Coach*
+        +getStadium(): Stadium*
+        +getPlayers(): vector<Player*>
+
+        +addPlayer(Player*): void
+        +setCoach(Coach*): void
+        +setStadium(Stadium*): void
+        +addSponsor(Sponsor*): void
+
+        +removePlayer(Player*): void
+        +removeCoach(): void
+        +removeStadium(): void
+        +removeSponsor(Sponsor*): void
+
         +display(): void
     }
 
@@ -67,8 +86,15 @@ classDiagram
     class League {
         -name: string
         -country: string
+        -teams: vector<Team*>
+
         +getName(): string
         +getCountry(): string
+        +getTeams(): vector<Team*>
+
+        +addTeam(Team*): void
+        +removeTeam(Team*): void
+
         +display(): void
     }
 
@@ -82,11 +108,28 @@ classDiagram
     class ScreenManager {
         -players : vector<PlayerPtr>
         -coaches : vector<CoachPtr>
-        // ... (outros vetores de entidades)
+        -teams : vector<TeamPtr>
+        -stadiums : vector<StadiumPtr>
+        -sponsors : vector<SponsorsPtr>
+        -leagues : vector<LeaguesPtr>
+        
+        -isPlayerLinked(Player*): bool
+        -isCoachLinked(Coach*): bool
+        -isStadiumLinked(Stadium*): bool
+        -isSponsorLinked(Sponsor*): bool
+        -isTeamLinked(Team*): bool
+
+        -addPlayerToTeam(Loggable*): void
+        -setCoachToTeam(Loggable*): void
+        -setStadiumToTeam(Loggable*): void
+        -addSponsorToTeam(Loggable*): void
+        -removeTeamMembers(Loggable*): void
+        -addTeamToLeague(Loggable*): void
+        -removeTeamFromLeague(Loggable*): void
+        
         +run(): void
         -showMainMenu(): void
         -managePlayers(): void
-        -addPlayer(): void
         -listItems(Loggable*): void
         -selectItem(Loggable*): int
         -clearScreen(): void
@@ -123,5 +166,5 @@ classDiagram
     League "1" o-- "*" Team : contains
     Contract "*" o-- "1" Player : for
     Contract "*" o-- "1" Team : binds
-    Team "" o-- "" Sponsor : sponsoredBy
+    Team "1" o-- "*" Sponsor : sponsoredBy
 ```

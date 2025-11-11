@@ -11,8 +11,8 @@
 
 | Nome Completo              | Matrícula   | E-mail Institucional     | 
 | ---------------------------| ------------| -------------------------| 
-| Pablo P. A. M. França      | 20250052719 | pablopfranca@ufrn.edu.br | 
 | [Nome do Aluno 2]          | [202xxxxx]  | [aluno2@ufrn.br]         | 
+| Pablo P. A. M. França      | 20250052719 | pablopfranca@ufrn.edu.br | 
 | Victor Ramon Firmo Moreira | 20250052835 | victor.moreira@ufrn.br   | 
 
 ---
@@ -61,5 +61,5 @@ make clean
 
 📚 Referências
 
-- [Material de aula / slides do professor]
-- [Livros, artigos, sites ou repositórios consultados]
+- [Apostilas de C++ | W3Schools]([asd](https://www.w3schools.com/cpp/))
+- [Slides da Disciplina - Linguagem de Programação I | UFRN](https://docs.google.com/presentation/d/1aahQ4B0Z-an3X81Z5jJh-QwnD7BNH4Y4u6e9Al5tIbI/edit?usp=sharing)

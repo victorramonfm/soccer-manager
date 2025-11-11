@@ -8,6 +8,7 @@
 
 void ScreenManager::manageSponsors() {
     int choice;
+    
     do {
         clearScreen();
         std::cout << "===== 💰 Gerenciar Patrocinadores =====\n";
@@ -90,6 +91,12 @@ void ScreenManager::updateSponsor(const std::vector<Loggable*>& loggables) {
 void ScreenManager::removeSponsor(const std::vector<Loggable*>& loggables) {
     int index = selectItem(loggables, "remover");
     if (index == -1) return;
+
+    Sponsor* sponsor = sponsors[index].get();
+
+    if (isSponsorLinked(sponsor)) {
+        throw ValidationException("O patrocinador (" + sponsor->getName() + ") nao pode ser removido, pois esta vinculado a pelo menos um time.");
+    }
 
     Loggable::print("Tem certeza que deseja remover ");
     std::cout << *(sponsors[index]);
