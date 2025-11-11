@@ -1,13 +1,14 @@
 #pragma once
 #include <string>
+
 #include "Loggable.h"
 
 class Person {
-protected:
+   protected:
     std::string name;
     int age;
 
-public:
+   public:
     Person(const std::string& n, int a) : name(n), age(a) {}
     virtual ~Person() {}
 
@@ -16,7 +17,5 @@ public:
     void setName(const std::string& n) { name = n; }
     void setAge(int a) { age = a; }
 
-    virtual void displayDetails() const {
-        std::cout << "  Nome: " << name << ", Idade: " << age;
-    }
+    virtual void displayDetails() const { std::cout << "  Nome: " << name << ", Idade: " << age; }
 };

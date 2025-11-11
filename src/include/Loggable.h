@@ -2,7 +2,7 @@
 #include <iostream>
 
 class Loggable {
-public:
+   public:
     virtual ~Loggable() {}
     virtual void display(std::ostream& os) const = 0;
     static void print(const std::string& message);
