@@ -9,11 +9,11 @@
 
 ## 👥 Integrantes do Grupo
 
-| Nome Completo              | Matrícula   | E-mail Institucional   | 
-| -------------------------- | ----------- | ---------------------- | 
-| [Nome do Aluno 1]          | [202xxxxx]  | [aluno1@ufrn.br]       | 
-| [Nome do Aluno 2]          | [202xxxxx]  | [aluno2@ufrn.br]       | 
-| Victor Ramon Firmo Moreira | 20250052835 | victor.moreira@ufrn.br | 
+| Nome Completo              | Matrícula   | E-mail Institucional     | 
+| ---------------------------| ------------| -------------------------| 
+| Pablo P. A. M. França      | 20250052719 | pablopfranca@ufrn.edu.br | 
+| [Nome do Aluno 2]          | [202xxxxx]  | [aluno2@ufrn.br]         | 
+| Victor Ramon Firmo Moreira | 20250052835 | victor.moreira@ufrn.br   | 
 
 ---
 
