@@ -39,7 +39,13 @@ int ScreenManager::selectItem(const std::vector<Loggable*>& items, const std::st
     return index - 1;
 }
 
-void ScreenManager::clearScreen() {
+void ScreenManager::printHeader() const {
+    clearScreen(); 
+    
+    std::cout << userConfig.getDisplayHeader() << std::endl;
+}
+
+void ScreenManager::clearScreen() const{
 #ifdef _WIN32
     system("cls");
 #else

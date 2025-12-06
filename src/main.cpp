@@ -1,7 +1,12 @@
+#include "./include/configuration.h"
 #include "./include/ScreenManager.h"
 
 int main() {
-    ScreenManager app;
-    app.run();
+    Configuration config;
+    config.load(); 
+    
+    ScreenManager manager(config); 
+    manager.run();
+
     return 0;
 }

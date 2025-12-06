@@ -11,6 +11,7 @@
 #include "Sponsor.h"
 #include "Stadium.h"
 #include "Team.h"
+#include "configuration.h"
 
 using PlayerPtr = std::unique_ptr<Player>;
 using CoachPtr = std::unique_ptr<Coach>;
@@ -21,6 +22,8 @@ using LeaguePtr = std::unique_ptr<League>;
 
 class ScreenManager {
    private:
+    Configuration userConfig;
+
     std::vector<PlayerPtr> players;
     std::vector<CoachPtr> coaches;
     std::vector<TeamPtr> teams;
@@ -29,11 +32,15 @@ class ScreenManager {
     std::vector<LeaguePtr> leagues;
 
     int getMenuOption(int min, int max);
-    void clearScreen();
+    void clearScreen() const;
     void pause();
     void print(const std::string& message);
 
+    void printHeader() const;
+
     void showMainMenu();
+
+    void manageConfigurations();
 
     void managePlayers();
     void manageCoaches();
@@ -81,7 +88,7 @@ class ScreenManager {
     bool isTeamLinked(const Team* team) const;
 
    public:
-    ScreenManager();
-
+    ScreenManager(const Configuration& config);
+    
     void run();
 };

@@ -8,11 +8,13 @@
 #include "../include/CustomException.h"
 #include "../include/Loggable.h"
 
-ScreenManager::ScreenManager() {}
+ScreenManager::ScreenManager(const Configuration& config) : userConfig(config) { }
 
 void ScreenManager::run() {
     int choice;
     do {
+        printHeader();
+
         showMainMenu();
         choice = getMenuOption(0, 7);
 
@@ -35,6 +37,9 @@ void ScreenManager::run() {
             case 6:
                 manageLeagues();
                 break;
+            case 7:
+                manageConfigurations();
+                break;
             case 0:
                 Loggable::print("Saindo... Ate logo!\n");
                 break;
@@ -43,7 +48,6 @@ void ScreenManager::run() {
 }
 
 void ScreenManager::showMainMenu() {
-    clearScreen();
     std::cout << "==============================\n";
     std::cout << "     ⚽ SOCCER MANAGER ⚽\n";
     std::cout << "==============================\n";
@@ -53,6 +57,7 @@ void ScreenManager::showMainMenu() {
     std::cout << "[4] 🏟️ Gerenciar Estadios\n";
     std::cout << "[5] 💰 Gerenciar Patrocinadores\n";
     std::cout << "[6] 🏆 Gerenciar Ligas\n";
+    std::cout << "[7] 🛠️ Gerenciar Configurações\n";
     std::cout << "[0] Sair\n";
     std::cout << "\nEscolha uma opcao: ";
 }
@@ -75,3 +80,4 @@ int ScreenManager::getMenuOption(int min, int max) {
         }
     }
 }
+
